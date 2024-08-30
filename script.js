@@ -1,5 +1,5 @@
 "use strict";
-var _a;
+var _a, _b;
 // Load word list
 const wordList = [
     'apple',
@@ -397,7 +397,8 @@ let word = getRandomWord();
 let attempts = 0;
 const maxAttempts = 5;
 const guessedLetters = new Set();
-(_a = document.getElementById('submit-guess')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
+// Funktion som hanterar gissningar
+function handleGuess() {
     const input = document.getElementById('guess-input').value.toLowerCase();
     if (input.length !== 5) {
         alert('Please enter a 5-letter word.');
@@ -413,6 +414,14 @@ const guessedLetters = new Set();
     else if (++attempts >= maxAttempts) {
         document.getElementById('message').textContent = `Game Over! The word was "${word}".`;
         document.getElementById('submit-guess').setAttribute('disabled', 'true');
+    }
+}
+// Event listener för "Submit"-knappen
+(_a = document.getElementById('submit-guess')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', handleGuess);
+// Event listener för "Enter"-tangenten
+(_b = document.getElementById('guess-input')) === null || _b === void 0 ? void 0 : _b.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        handleGuess();
     }
 });
 // Funktion för att initialisera alfabetet

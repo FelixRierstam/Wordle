@@ -398,7 +398,8 @@ let attempts = 0;
 const maxAttempts = 5;
 const guessedLetters: Set<string> = new Set();
 
-document.getElementById('submit-guess')?.addEventListener('click', () => {
+// Funktion som hanterar gissningar
+function handleGuess() {
     const input = (document.getElementById('guess-input') as HTMLInputElement).value.toLowerCase();
     if (input.length !== 5) {
         alert('Please enter a 5-letter word.');
@@ -415,6 +416,16 @@ document.getElementById('submit-guess')?.addEventListener('click', () => {
     } else if (++attempts >= maxAttempts) {
         document.getElementById('message')!.textContent = `Game Over! The word was "${word}".`;
         document.getElementById('submit-guess')!.setAttribute('disabled', 'true');
+    }
+}
+
+// Event listener för "Submit"-knappen
+document.getElementById('submit-guess')?.addEventListener('click', handleGuess);
+
+// Event listener för "Enter"-tangenten
+document.getElementById('guess-input')?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        handleGuess();
     }
 });
 
@@ -434,7 +445,6 @@ function initializeAlphabet() {
 // Uppdatera alfabetet baserat på gissningar
 function updateAlphabet(input: string) {
     const letterButtons = document.getElementsByClassName('letter-button');
-    
     
     // Lägg till nya gissade bokstäver
     for (const letter of input) {
