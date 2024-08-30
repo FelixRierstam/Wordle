@@ -435,6 +435,7 @@ function initializeAlphabet() {
 function updateAlphabet(input: string) {
     const letterButtons = document.getElementsByClassName('letter-button');
     
+    
     // Lägg till nya gissade bokstäver
     for (const letter of input) {
         guessedLetters.add(letter);
